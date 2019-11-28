@@ -9,6 +9,13 @@ class RequiredDegree(models.Model):
         verbose_name = 'escolaridade',
     )
 
+    class Meta:
+        db_table = 'grau_minimo'
+        verbose_name = 'grau mínimo exigido'
+
+    def __str__(self):
+        return self.degree
+
 
 class SalaryRange(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -24,6 +31,13 @@ class SalaryRange(models.Model):
         decimal_places=2,
         verbose_name='valor teto da faixa',
     )
+
+    class Meta:
+        db_table = 'faixa_salarial'
+        verbose_name = 'faixa salarial'
+
+    def __str__(self):
+        return f'{self.value1} até f{self.value2}'
 
 
 class Jobs(models.Model):
@@ -44,3 +58,10 @@ class Jobs(models.Model):
         RequiredDegree,
         models.PROTECT,
     )
+
+    class Meta:
+        db_table = 'vagas'
+        verbose_name = 'vagas'
+
+    def __str__(self):
+        return self.job_name
