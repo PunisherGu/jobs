@@ -1,0 +1,24 @@
+- model: opportunities.Jobs
+  pk: 1
+  fields:
+    degree: Ensino fundametal
+- model: opportunities.Jobs
+  pk: 2
+  fields:
+    degree: Ensino médio
+- model: opportunities.Jobs
+  pk: 3
+  fields:
+    degree: Tecnólogo
+- model: opportunities.Jobs
+  pk: 4
+  fields:
+    degree: Ensino Superior
+- model: opportunities.Jobs
+  pk: 5
+  fields:
+    degree: Pós / MBA / Mestrado
+- model: opportunities.Jobs
+  pk: 6
+  fields:
+    degree: Doutorado
