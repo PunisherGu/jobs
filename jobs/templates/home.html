@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Bem vindo ao Jobsz! <span class="icon-emo-happy"></span></h2>
+  <p class="lead">
+    Se você já possui uma conta, vá em frente: <a href="{% url 'login' %}">login</a>. Se você é novo por aqui, vamos começar criando uma
+     <a href="{% url 'candidate_signup' %}">conta de candidato</a> ou uma <a href="{% url 'employer_signup' %}">conta de recrutador</a>.
+  </p>
+  <hr>
+  <h3>#Teste Python/Django</h3>
+  <p>
+    Parafraseando Balchior, sou apenas um rapaz latino americano com algum código no bolso. <a href="https://www.linkedin.com/in/gustavo-nogueira-13471714b/">Linkedin</a>.
+  </p>
+{% endblock %}

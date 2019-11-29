@@ -1,24 +1,39 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
+from django.contrib.auth.models import User
 
-from classroom.models import Student, Subject, User
+from users.models import CustomUser, Candidate, Employer
 
 class CandidateSignUpForm(UserCreationForm):
-    interests = forms.ModelMultipleChoiceField(
-        queryset=Subject.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=True
-    )
+    email = forms.EmailField(required=True, label='Email')
 
     class Meta(UserCreationForm.Meta):
-        model = User
+        model = CustomUser
+        fields = ("email", "first_name", "last_name" ,"password1", "password2")
 
     @transaction.atomic
     def save(self):
         user = super().save(commit=False)
-        user.is_student = True
+        user.is_candidate = True
+        user.username = user.email
         user.save()
-        student = Student.objects.create(user=user)
-        student.interests.add(*self.cleaned_data.get('interests'))
+        student = Candidate.objects.create(user=user)
+        return user
+
+
+class EmployerSignUpForm(UserCreationForm):
+    email = forms.EmailField(required=True, label='Email')
+
+    class Meta(UserCreationForm.Meta):
+        model = CustomUser
+        fields = ("email", "first_name", "last_name" ,"password1", "password2")
+
+    @transaction.atomic
+    def save(self):
+        user = super().save(commit=False)
+        user.is_employer = True
+        user.username = user.email
+        user.save()
+        student = Employer.objects.create(user=user)
         return user
