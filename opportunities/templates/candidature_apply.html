@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Olá, {{user.first_name}}</h2>
+  <h4>Por favor revise as informações da vaga antes de se candidatar.</h4>
+  <table style="width:100%" border=2 frame=all rules=rows">
+    <tr>
+      <td style="text-align:center"><h6>Vaga</h6></td>
+      <td style="text-align:center"><h6>Faixa salarial</h6></td>
+      <td style="text-align:center"><h6>Requisitos<h6></td>
+      <td style="text-align:center"><h6>Escolariade exigida</h6></td>
+    </tr>
+    <tr>
+      <td style="text-align:center">{{ opportunity.job_name }}</td>
+      <td style="text-align:center">{{ opportunity.salary }}</td>
+      <td style="text-align:center">{{ opportunity.requirements|linebreaksbr }}</td>
+      <td style="text-align:center">{{ opportunity.required_degree }}</td>
+    </tr>
+  </table>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Candidatar</button>
+  </form>
+{% endblock %}

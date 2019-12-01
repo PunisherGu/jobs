@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if user.is_authenticated and user.is_employer %}
+    <h2>Nova vagas</h2>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Salvar</button>
+    </form>
+    {% else %}
+      <h2>Teste</h2>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2><center>Vaga: {{opportunity.job_name}}</center></h2>
+  <table style="width:100%" border=2 frame=all rules=rows">
+    <tr>
+      <td style="text-align:center"><h6>Faixa salarial</h6></td>
+      <td style="text-align:center"><h6>Requisitos<h6></td>
+      <td style="text-align:center"><h6>Escolariade exigida</h6></td>
+      {% if user.is_authenticated and user.is_employer %}
+        <td style="text-align:center"><h6><center>Editar</center></h6></td>
+        <td style="text-align:center"><h6><center>Deletar</center></h6></td>
+      {% else %}
+        <td style="text-align:center"><h6><center>candidatar</center></h6></td>
+      {% endif %}
+    </tr>
+    <tr>
+      <td style="text-align:center">{{ opportunity.salary }}</td>
+      <td style="text-align:center">{{ opportunity.requirements|linebreaksbr }}</td>
+      <td style="text-align:center">{{ opportunity.required_degree }}</td>
+      {% if user.is_authenticated and user.is_employer %}
+        <td style="text-align:center"><a class="btn btn-default" href="{% url 'opportunity_edit' pk=opportunity.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+        <td style="text-align:center"><a class="btn btn-default" href="{% url 'opportunity_delete' pk=opportunity.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+      {% else %}
+        <td style="text-align:center"><a class="btn btn-default" href="{% url 'candidature_apply' pk=opportunity.pk  %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+      {% endif %}
+    </tr>
+  </table>
+{% endblock %}

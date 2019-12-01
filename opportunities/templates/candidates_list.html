@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2><center>Candidatos aplicados</center></h2>
+  <table style="width:100%" border=2 frame=all rules=rows">
+    <tr>
+      <td style="text-align:center"><h6>Nome do candidato</h6></td>
+      <td style="text-align:center"><h6>Pretensão salarial</h6></td>
+      <td style="text-align:center"><h6>Escolaridade<h6></td>
+      <td style="text-align:center"><h6>Experiência<h6></td>
+      <td style="text-align:center"><h6>Afinidade<h6></td>
+    </tr>
+    {% for candidature in candidatures %}
+      <tr>
+        <td style="text-align:center"><h7>{{ candidature.candidate.user.first_name }}</h7></td>
+        <td style="text-align:center">{{ candidature.salary_claim }}</td>
+        <td style="text-align:center">{{ candidature.candidate.degree }}</td>
+        <td style="text-align:center">{{ candidature.candidate.experiences|linebreaksbr }}</td>
+        <td style="text-align:center">{{ candidature.affinity }}</td>
+    {% endfor %}
+  </table>
+  Voltar: <a href="{% url 'opportunities_list' %}">Oportunidades</a>
+{% endblock %}

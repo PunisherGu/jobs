@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 
+from opportunities.models import RequiredDegree
 
 class CustomUser(AbstractUser):
     is_employer = models.BooleanField(default=False)
@@ -13,6 +14,19 @@ class Candidate(models.Model):
         CustomUser,
         on_delete=models.CASCADE,
         primary_key=True
+    )
+    experiences = models.TextField(
+        db_column = 'experiencias de trabalho',
+        verbose_name = 'experiencias',
+        null=True,
+        blank=True
+    )
+    degree = models.ForeignKey(
+        RequiredDegree,
+        models.PROTECT,
+        verbose_name='grau de formação',
+        null=True,
+        blank=True
     )
 
     class Meta:

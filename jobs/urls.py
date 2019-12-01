@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from users import views
+from users import views as userViews
+from opportunities import views as opportunitiesViews
 from django.views.generic.base import TemplateView
 
 
@@ -23,7 +24,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/signup/', views.SignUpView.as_view(), name='signup'),
-    path('accounts/signup/candidate/', views.CandidateSignUpView.as_view(), name='candidate_signup'),
-    path('accounts/signup/employer/', views.EmployerSignUpView.as_view(), name='employer_signup'),
+    path('accounts/signup/candidate/', userViews.CandidateSignUpView.as_view(), name='candidate_signup'),
+    path('accounts/signup/employer/', userViews.EmployerSignUpView.as_view(), name='employer_signup'),
+    path('jobs/', opportunitiesViews.opportunities_list, name='opportunities_list'),
+    path('jobs/new/', opportunitiesViews.OpportunitiesView.as_view(), name='opportunities_new'),
+    path('jobs/<int:pk>/', opportunitiesViews.opportunity_detail, name='opportunity_detail'),
+    path('jobs/<int:pk>/edit/', opportunitiesViews.opportunity_edit, name='opportunity_edit'),
+    path('jobs/<int:pk>/delete/', opportunitiesViews.opportunity_delete, name='opportunity_delete'),
+    path('candidature/<int:pk>/', userViews.candidature_apply, name='candidature_apply'),
+    path('candidature_success',TemplateView.as_view(template_name='candidature_success.html'), name='candidature_success'),
+    path('candidates_list/<int:pk>', opportunitiesViews.candidates_list, name='candidates_list'),
 ]

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if messages %}
+    <h4{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h4>
+{% endif %}
+  <h2><center>Vagas Disponíveis</center></h2>
+  {% if user.is_employer %}
+    <div class="col-12 text-right">
+      <a href="{% url 'opportunities_new' %}" class="btn btn-primary" role="button">Criar vaga</a>
+    </div>
+  {% endif %}
+  <table style="width:100%" border=2 frame=all rules=rows">
+    <tr>
+      <td style="text-align:center"><h6>Nome da vaga</h6></td>
+      <td style="text-align:center"><h6>Faixa salarial</h6></td>
+      <td style="text-align:center"><h6>Requisitos<h6></td>
+      <td style="text-align:center"><h6>Escolariade exigida</h6></td>
+      {% if user.is_employer %}
+        <td style="text-align:center"><h6><center>Candidaturas</center></h6></td>
+      {% endif %}
+    </tr>
+    {% for opportunity in opportunities %}
+      <tr>
+        <td style="text-align:center"><h7><a href="{% url 'opportunity_detail' pk=opportunity.pk %}">{{ opportunity.job_name }}</a></h7></td>
+        <td style="text-align:center">{{ opportunity.salary|linebreaksbr }}</td>
+        <td style="text-align:center">{{ opportunity.requirements|linebreaksbr }}</td>
+        <td style="text-align:center">{{ opportunity.required_degree|linebreaksbr }}</td>
+        {% if user.is_employer %}
+        <td style="text-align:center"><a href="{% url 'candidates_list' pk=opportunity.pk %}">{{ opportunity.applications }}</a></td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
