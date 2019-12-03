@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'jobs',
     'opportunities',
     'users',
+    'chartjs',
 ]
 
 MIDDLEWARE = [

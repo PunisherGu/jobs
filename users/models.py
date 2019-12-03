@@ -28,6 +28,10 @@ class Candidate(models.Model):
         null=True,
         blank=True
     )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        db_column='criado_em'
+    )
 
     class Meta:
         db_table = 'candidato'
@@ -43,6 +47,10 @@ class Employer(models.Model):
         CustomUser,
         on_delete=models.CASCADE,
         primary_key=True
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        db_column='criado_em'
     )
 
     class Meta:

@@ -7,6 +7,8 @@
   {% if user.is_employer %}
     <div class="col-12 text-right">
       <a href="{% url 'opportunities_new' %}" class="btn btn-primary" role="button">Criar vaga</a>
+      <a href="{% url 'opportunities_by_month' %}" class="btn btn-primary" role="button">Gráfico de vagas</a>
+      <a href="{% url 'candidates_by_month' %}" class="btn btn-primary" role="button">Gráfico de candidatos</a>
     </div>
   {% endif %}
   <table style="width:100%" border=2 frame=all rules=rows">

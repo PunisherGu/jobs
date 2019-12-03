@@ -18,10 +18,10 @@
       <td style="text-align:center">{{ opportunity.requirements|linebreaksbr }}</td>
       <td style="text-align:center">{{ opportunity.required_degree }}</td>
       {% if user.is_authenticated and user.is_employer %}
-        <td style="text-align:center"><a class="btn btn-default" href="{% url 'opportunity_edit' pk=opportunity.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
-        <td style="text-align:center"><a class="btn btn-default" href="{% url 'opportunity_delete' pk=opportunity.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+        <td style="text-align:center"><a class="btn btn-default" href="{% url 'opportunity_edit' pk=opportunity.pk %}"><i class='far fa-edit'></i></a></td>
+        <td style="text-align:center"><a class="btn btn-default" href="{% url 'opportunity_delete' pk=opportunity.pk %}"><i class="fa fa-trash"></i></a></td>
       {% else %}
-        <td style="text-align:center"><a class="btn btn-default" href="{% url 'candidature_apply' pk=opportunity.pk  %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+        <td style="text-align:center"><a class="btn btn-default" href="{% url 'candidature_apply' pk=opportunity.pk  %}"><i class="fas fa-pen"></i></a></td>
       {% endif %}
     </tr>
   </table>

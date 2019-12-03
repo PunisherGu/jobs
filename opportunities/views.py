@@ -1,3 +1,5 @@
+from django.db.models import Count
+from django.db.models.functions import TruncMonth
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import CreateView
 from django.contrib import messages
@@ -6,6 +8,7 @@ import json
 from .models import Jobs, CandidatesJobsApply
 from .forms import OpportunitiesNewForm
 from django.shortcuts import redirect
+from users.models import Candidate
 
 class OpportunitiesView(CreateView):
     model = Jobs
@@ -54,3 +57,25 @@ def opportunity_delete(request, pk):
         return render(request, 'opportunities_list.html')
     opportunity.delete()
     return render(request, 'opportunities_list.html')
+
+def opportunities_by_month(request):
+    values = list(Jobs.objects.annotate(month=TruncMonth('created_at')).values('month').annotate(total=Count('id')))
+    months = [obj['month'].strftime("%b") for obj in values]
+
+    context = {
+        'values': values,
+        'months': json.dumps(months),
+    }
+
+    return render(request, 'opportunities_by_month.html', {'context': context})
+
+def candidates_by_month(request):
+    values = list(Candidate.objects.annotate(month=TruncMonth('created_at')).values('month').annotate(total=Count('user_id')))
+    months = [obj['month'].strftime("%b") for obj in values]
+
+    context = {
+        'values': values,
+        'months': json.dumps(months),
+    }
+
+    return render(request, 'candidates_by_month.html', {'context': context})

@@ -11,4 +11,7 @@
   <p>
     Parafraseando Balchior, sou apenas um rapaz latino americano com algum código no bolso. <a href="https://www.linkedin.com/in/gustavo-nogueira-13471714b/">Linkedin</a>.
   </p>
+  {% if user.is_authenticated %}
+    Oportunidades: <a href="{% url 'opportunities_list' %}">Oportunidades</a>
+  {% endif %}
 {% endblock %}

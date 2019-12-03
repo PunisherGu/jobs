@@ -34,4 +34,6 @@ urlpatterns = [
     path('candidature/<int:pk>/', userViews.candidature_apply, name='candidature_apply'),
     path('candidature_success',TemplateView.as_view(template_name='candidature_success.html'), name='candidature_success'),
     path('candidates_list/<int:pk>', opportunitiesViews.candidates_list, name='candidates_list'),
+    path('opportunities/chart', opportunitiesViews.opportunities_by_month, name='opportunities_by_month'),
+    path('candidates/chart', opportunitiesViews.candidates_by_month, name='candidates_by_month'),
 ]

@@ -97,6 +97,10 @@ class Jobs(models.Model):
         blank=True,
         through=CandidatesJobsApply,
     )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        db_column='criado_em'
+    )
 
     class Meta:
         db_table = 'vagas'
